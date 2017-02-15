@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
-from game.char.char import BaseChar
+from game.chars.char import BaseChar
 
-from game.char.ennemy import Ennemy
-from game.char.player import Player
+from game.chars.ennemy import Ennemy
+from game.chars.player import Player
 
-from game.scene.scene import BaseScene
+from game.scenes.scene import BaseScene
 
 
-from game.item.item import BaseItem
-from game.item.weapon import Weapon
-from game.item.disposable import Disposable
-from game.item.effect.heal import Heal
-from game.item.inventory import Inventory
+from game.items.item import BaseItem
+from game.items.weapon import Weapon
+from game.items.disposable import Disposable
+from game.items.effect.heal import Heal
+from game.items.inventory import Inventory
 
 
 def main():
@@ -34,7 +34,5 @@ def main():
 
 
 
-if __name__ == "__main___":
-    print('main')
+if __name__ == "__main__":
     main()
-main()
