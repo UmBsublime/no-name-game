@@ -5,3 +5,5 @@ class BaseChar():
         self.name = name
         self.hp = hp
     
+
+
