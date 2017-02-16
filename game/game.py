@@ -15,3 +15,6 @@ class Game():
 
     def clean_up(self):
         pass
+
+    def __str__(self):
+        return self.__class__.__name__

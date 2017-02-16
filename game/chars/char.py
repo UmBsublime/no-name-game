@@ -6,4 +6,5 @@ class BaseChar():
         self.hp = hp
     
 
-
+    def __str__(self):
+        return self.__class__.__name__

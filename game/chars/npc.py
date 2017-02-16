@@ -1,9 +1,9 @@
 from .char import BaseChar
 
-class Ennemy(BaseChar):
+class Npc(BaseChar):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def die(self):
+    def interact(self):
         pass

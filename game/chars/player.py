@@ -25,3 +25,5 @@ class Player(BaseChar):
         print(f.format(self.name, self.dex, self.agl, self.str, self.lck))
         self.inventory.show_content()
 
+    def level_up(self):
+        pass
