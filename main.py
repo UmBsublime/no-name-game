@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 
-from game.chars.char import BaseChar
-
-from game.chars.ennemy import Ennemy
-from game.chars.player import Player
-
-from game.scenes.scene import BaseScene
-
-
+from game.actors.actor import BaseActor
+from game.actors.ennemy import Ennemy
+from game.actors.player import Player
+from game.effects.heal import Heal
+from game.items.disposable import Disposable
+from game.items.inventory import BaseInventory
 from game.items.item import BaseItem
 from game.items.weapon import Weapon
-from game.items.disposable import Disposable
-from game.items.effects.heal import Heal
-from game.items.inventory import BaseInventory
+from game.maps.map import BaseScene
 
 
 def main():
-    b = BaseChar(10, 'dummy')
+    b = BaseActor(10, 'dummy')
     i = BaseItem('stick', 5, 2)
 
     dagger = Weapon(5, 'Dagger', 5, 1)

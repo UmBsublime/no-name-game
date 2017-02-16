@@ -1,7 +1,7 @@
-from .char import BaseChar
+from .actor import BaseActor
 from ..items.inventory import BaseInventory
 
-class Player(BaseChar):
+class Player(BaseActor):
 
     def __init__(self, dex, agl, str, lck, inventory, *args, **kwargs):
 
@@ -25,5 +25,3 @@ class Player(BaseChar):
         print(f.format(self.name, self.dex, self.agl, self.str, self.lck))
         self.inventory.show_content()
 
-    def level_up(self):
-        pass

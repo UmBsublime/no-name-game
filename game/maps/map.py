@@ -17,8 +17,5 @@ class BaseScene():
     def next_turn(self):
         pass
 
-    def refresh(self):
+    def reload(self):
         pass
-
-    def __str__(self):
-        return self.__class__.__name__
