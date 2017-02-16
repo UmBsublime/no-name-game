@@ -11,8 +11,8 @@ from game.scenes.scene import BaseScene
 from game.items.item import BaseItem
 from game.items.weapon import Weapon
 from game.items.disposable import Disposable
-from game.items.effect.heal import Heal
-from game.items.inventory import Inventory
+from game.items.effects.heal import Heal
+from game.items.inventory import BaseInventory
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     s_heal = Heal(10)
     s_potion = Disposable([s_heal], 'Small Potion', 10, 1)
 
-    inv = Inventory(10,[dagger, s_potion])
+    inv = BaseInventory(10,[dagger, s_potion])
     e = Ennemy(20, 'Looser')
 
 

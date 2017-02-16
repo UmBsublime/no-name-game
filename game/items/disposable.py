@@ -11,6 +11,3 @@ class Disposable(BaseItem):
 
     def consume(self):
         pass
-
-    def __str__(self):
-        return 'Disposable'

@@ -1,4 +1,5 @@
 from .char import BaseChar
+from ..items.inventory import BaseInventory
 
 class Player(BaseChar):
 
@@ -11,6 +12,8 @@ class Player(BaseChar):
         self.str = str
         self.lck = lck
         self.inventory = inventory
+        self.left_hand = BaseInventory(1)
+        self.right_hand = BaseInventory(1)
 
     def stats(self):
         f = "Name:..{}\n" \

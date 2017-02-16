@@ -1,6 +1,6 @@
-class Inventory():
+class BaseInventory():
 
-    def __init__(self, size, content):
+    def __init__(self, size, content=[]):
         self.size = size
         self.content = content
 
@@ -8,9 +8,6 @@ class Inventory():
         pass
 
     def get_content(self):
-        pass
-
-    def show_item(self):
         pass
 
     def show_content(self):

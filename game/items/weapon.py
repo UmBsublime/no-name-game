@@ -6,10 +6,14 @@ class Weapon(BaseItem):
 
         super().__init__(*args, **kwargs)
 
-        self.dmg = dmg
+        self._dmg = dmg
 
-    def get_dmg(self):
+    @property
+    def dmg(self):
+        return self._dmg
+
+    @dmg.setter
+    def dmg(self, value):
         pass
 
-    def __str__(self):
-        return "Weapon"
+#"Weapon"
