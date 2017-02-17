@@ -20,7 +20,8 @@ class BaseAction():
         pass
 
     def perform(self):
-        return ActionResult(False)
+        raise NotImplemented
+
 
 class Walk(BaseAction):
 

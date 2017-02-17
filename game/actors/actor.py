@@ -11,7 +11,7 @@ class BaseActor():
         self._next_action = None
         return action
 
-    def set_next_action(self):
+    def set_next_action(self, action):
         '''
         populate self._next_action
         '''

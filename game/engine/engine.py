@@ -16,7 +16,7 @@ class Engine():
         #self.player = config['player']
         self.map = config['Map']
         self.input_source = config['Input_Source']
-        self.actors = self._init_actors()
+        self.actors = self.map.get_actors()
         self._current_actor = 0
 
     def process(self):
