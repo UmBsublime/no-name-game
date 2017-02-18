@@ -30,11 +30,10 @@ class MultiMap():
     def try_move(self, src_pos, dst_pos):
         if self.current_map.try_move(src_pos, dst_pos) == 'OutOfBounds':
             print("OutOfBounds")
-            #exit()
+
             direction = self._find_direction(src_pos, dst_pos)
             return self._try_multimap_move(src_pos, direction)
         return self.current_map.try_move(src_pos, dst_pos)
-
 
     def do_move(self, src_pos, dst_pos):
         if self.current_map.try_move(src_pos, dst_pos) is True:
@@ -43,14 +42,12 @@ class MultiMap():
             new_pos = dst_pos
         else:
             print("Doing move")
-            #exit()
             direction = self._find_direction(src_pos, dst_pos)
             src_tile = self.current_map._get_tile_at_pos(src_pos)
             if direction == 'left':
                 self._current_pos = Position(self._current_pos.pos_x, self._current_pos.pos_y - 1)
                 self.current_map = self._map_at_pos(self._current_pos)
                 new_map_x = src_pos.pos_x
-                #list(map.map[src_pos.pos_x].keys())[-1]
                 new_map_y = list(self.current_map.map[src_pos.pos_x].keys())[-1]
             if direction == 'right':
                 self._current_pos = Position(self._current_pos.pos_x, self._current_pos.pos_y + 1)
@@ -72,21 +69,12 @@ class MultiMap():
             self.current_map._set_tile_at_pos(src_tile, new_pos)
         return new_pos
 
-
-
-    def _map_move(self, pos):
-        pass
-
     def _map_at_pos(self, pos):
         return self.multimap[pos.pos_x][pos.pos_y]
 
-    def _find_new_pos(self,pos, direction):
-
-        return pos
-
     def _find_direction(self, src_pos, dst_pos):
         if src_pos.pos_x > dst_pos.pos_x:
-            return 'down'
+            return 'up'
         if src_pos.pos_x < dst_pos.pos_x:
             return 'down'
         if src_pos.pos_y > dst_pos.pos_y:
@@ -96,31 +84,25 @@ class MultiMap():
         return 'none'
 
     def _try_multimap_move(self, src_pos, direction):
-        print("We are here: {}".format(direction))
+        print("We are trying to go: {}".format(direction))
 
-        #exit()
         try:
             if direction == 'left':
                 map = self._map_at_pos(Position(self._current_pos.pos_x, self._current_pos.pos_y - 1))
                 test_x = src_pos.pos_x
-                test_y = list(map.map[src_pos.pos_x].keys())[-1]#list(list(map.map.keys())[0].keys())[-1]
-                #return map.try_move(Position(test_x, test_y))
+                test_y = list(map.map[src_pos.pos_x].keys())[-1]
             if direction == 'right':
-                map = self._map_at_pos(Position(self._current_pos.pos_x + 1, self._current_pos.pos_y))
+                map = self._map_at_pos(Position(self._current_pos.pos_x, self._current_pos.pos_y + 1))
                 test_x = src_pos.pos_x
                 test_y = list(map.map[src_pos.pos_x].keys())[0]
-                #return map.try_move(Position(test_x, test_y))
             if direction == 'up':
                 map = self._map_at_pos(Position(self._current_pos.pos_x - 1, self._current_pos.pos_y))
                 test_x = list(map.map.keys())[-1]
                 test_y = src_pos.pos_y
-                #return map.try_move(Position(test_x, test_y))
             if direction == 'down':
                 map = self._map_at_pos(Position(self._current_pos.pos_x + 1, self._current_pos.pos_y))
                 test_x = list(map.map.keys())[0]
                 test_y = src_pos.pos_y
-                print('we are here')
-                #return map.try_move(src_pos, Position(test_x, test_y))
             return map.check_pos(Position(test_x, test_y))
         except KeyError:
             print("we got an exception")

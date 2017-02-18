@@ -81,15 +81,10 @@ class Map():
         try:
             return (self._get_tile_at_pos(pos))
         except KeyError:
-            print('Tried pos: {}'.format(pos))
             return 'OutOfBounds'
 
     def try_move(self, src_pos, dst_pos):
         try:
-            print("Src TileType: {}, Src Pos: {}\n"
-                  "Dst_Pos: {}".format(self._get_tile_at_pos(src_pos),
-                                                             src_pos,
-                                                             dst_pos))
             if self._get_tile_at_pos(src_pos).can_move \
                     and self._get_tile_at_pos(dst_pos).can_move_to:
                 return True
