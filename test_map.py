@@ -1,6 +1,8 @@
-from os import system
+import curses
+
 from game.maps.map import Map, Position
 from game.maps.multimap import MultiMap
+
 
 
 def move(map ,player, direction):
@@ -51,8 +53,7 @@ def map_demo():
         hero_pos = move(mm, hero_pos, choices[selection])
 
 
-import curses
-from curses.textpad import Textbox, rectangle
+
 map_file_struc = {1: {1: './maps/multimap_1_1.txt',
                           2: './maps/multimap_1_2.txt'},
                       2: {1: './maps/multimap_2_1.txt',
@@ -83,6 +84,8 @@ def curses_test(stdscr):
             break
         hero_pos = move(mm, hero_pos, choices[chr(c)])
         refresh_map(mapscr, mm)
+
+
 def refresh_map(win, mm):
     win.clear()
     for line in mm.current_map.map.keys():
@@ -100,12 +103,6 @@ def refresh_map(win, mm):
 def main():
     
     #map_demo()
-    #stdscr = curses.initscr()
-    #curses.noecho()
-    #curses.cbreak()
-    #stdscr.keypad(True)
-    
-    
     curses.wrapper(curses_test)
 
     
