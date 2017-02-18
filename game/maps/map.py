@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from .tile import ActorTile, WallTile, FloorTile, BaseTile
 
 tile_repr ={'!': ActorTile,
@@ -8,6 +9,9 @@ class Position():
     def __init__(self, pos_x , pos_y):
         self.pos_x = pos_x
         self.pos_y = pos_y
+
+    def __str__(self):
+        return '({},{})'.format(self.pos_x, self.pos_y)
 
 
 class Map():
@@ -28,13 +32,13 @@ class Map():
             with open(self.source_file) as f:
                 file_content = f.readlines()
                 #print(file_content)
-            self.file_content = [x.strip() for x in file_content]
+            self.file_content = [x.strip('\n') for x in file_content]
 
         except (OSError, FileNotFoundError) as e:
             print("Can't find source file")
             raise e
 
-        self.map = {}
+        self.map = OrderedDict()
         x_index = 1
         for line in self.file_content:
             self.map[x_index] = {}
@@ -70,18 +74,29 @@ class Map():
         #map change
         self._set_tile_at_pos(src_tile, dst_pos)
         self._set_tile_at_pos(dst_tile, src_pos)
+        ##return dst_pos
+
+
+    def check_pos(self, pos):
+        try:
+            return (self._get_tile_at_pos(pos))
+        except KeyError:
+            print('Tried pos: {}'.format(pos))
+            return 'OutOfBounds'
 
     def try_move(self, src_pos, dst_pos):
-        #print("Src TileType: {}, Can Move: {}\n"
-        #      "Dst TileType: {}, Can Move To: {}".format(self._get_tile_at_pos(src_pos),
-        #                                                 self._get_tile_at_pos(src_pos).can_move,
-        #                                                 self._get_tile_at_pos(dst_pos),
-        #                                                 self._get_tile_at_pos(dst_pos).can_move_to))
-        if self._get_tile_at_pos(src_pos).can_move \
-                and self._get_tile_at_pos(dst_pos).can_move_to:
-            return True
+        try:
+            print("Src TileType: {}, Src Pos: {}\n"
+                  "Dst_Pos: {}".format(self._get_tile_at_pos(src_pos),
+                                                             src_pos,
+                                                             dst_pos))
+            if self._get_tile_at_pos(src_pos).can_move \
+                    and self._get_tile_at_pos(dst_pos).can_move_to:
+                return True
 
-        return False
+            return False
+        except KeyError:
+            return 'OutOfBounds'
 
     def reload(self):
         self.map = self._prepare_map()
