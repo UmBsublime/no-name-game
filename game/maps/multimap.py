@@ -29,7 +29,7 @@ class MultiMap():
 
     def try_move(self, src_pos, dst_pos):
         if self.current_map.try_move(src_pos, dst_pos) == 'OutOfBounds':
-            print("OutOfBounds")
+            #print("OutOfBounds")
 
             direction = self._find_direction(src_pos, dst_pos)
             return self._try_multimap_move(src_pos, direction)
@@ -41,7 +41,7 @@ class MultiMap():
             self.current_map.do_move(src_pos, dst_pos)
             new_pos = dst_pos
         else:
-            print("Doing move")
+            #print("Doing move")
             direction = self._find_direction(src_pos, dst_pos)
             src_tile = self.current_map._get_tile_at_pos(src_pos)
             if direction == 'left':
@@ -65,7 +65,7 @@ class MultiMap():
                 new_map_x = list(self.current_map.map.keys())[0]
                 new_map_y = src_pos.pos_y
             new_pos = Position(new_map_x, new_map_y)
-            print(new_pos)
+            #print(new_pos)
             self.current_map._set_tile_at_pos(src_tile, new_pos)
         return new_pos
 
@@ -84,7 +84,7 @@ class MultiMap():
         return 'none'
 
     def _try_multimap_move(self, src_pos, direction):
-        print("We are trying to go: {}".format(direction))
+        #print("We are trying to go: {}".format(direction))
 
         try:
             if direction == 'left':
@@ -105,5 +105,5 @@ class MultiMap():
                 test_y = src_pos.pos_y
             return map.check_pos(Position(test_x, test_y))
         except KeyError:
-            print("we got an exception")
+            #print("we got an exception")
             return False
