@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from .map import FloorTile
 
 from .map import Map, Position
 
@@ -44,6 +45,8 @@ class MultiMap():
             #print("Doing move")
             direction = self._find_direction(src_pos, dst_pos)
             src_tile = self.current_map._get_tile_at_pos(src_pos)
+            
+            backup_map = self.current_map
             if direction == 'left':
                 self._current_pos = Position(self._current_pos.pos_x, self._current_pos.pos_y - 1)
                 self.current_map = self._map_at_pos(self._current_pos)
@@ -66,6 +69,9 @@ class MultiMap():
                 new_map_y = src_pos.pos_y
             new_pos = Position(new_map_x, new_map_y)
             #print(new_pos)
+            #backup_map._set_tile_at_pos()
+            dst_tile = self.current_map._get_tile_at_pos(new_pos)
+            backup_map._set_tile_at_pos(dst_tile, src_pos)
             self.current_map._set_tile_at_pos(src_tile, new_pos)
         return new_pos
 
