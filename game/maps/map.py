@@ -55,7 +55,7 @@ class Map():
             line = ''
             for col in self.map[row].keys():
                 line += self.map[row][col].representation
-            #print(line)
+            print(line)
 
     def _get_tile_at_pos(self, pos):
         return self.map[pos.pos_x][pos.pos_y]

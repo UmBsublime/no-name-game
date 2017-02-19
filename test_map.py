@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import curses
 
 from game.maps.map import Map, Position
@@ -30,18 +31,17 @@ def map_demo():
                's': 'down',
                'd': 'right'}
 
-    m = Map('./maps/map1.txt')
-    map_file_struc = {1: {1: './maps/multimap_1_1.txt',
-                          2: './maps/multimap_1_2.txt'},
-                      2: {1: './maps/multimap_2_1.txt',
-                          2: './maps/multimap_2_2.txt'}}
+    map_file_struc = {1: {1: '/tmp/no-name-game/maps/multimap_1_1.txt',
+                          2: '/tmp/no-name-game/maps/multimap_1_2.txt'},
+                      2: {1: '/tmp/no-name-game/maps/multimap_2_1.txt',
+                          2: '/tmp/no-name-game/maps/multimap_2_2.txt'}}
     mm = MultiMap(map_file_struc)
     hero_pos = Position(3, 5)
 
     while True:
-        from os import system
-        #print(chr(27) + "[2J")
-        system("clear")
+        #from os import system
+        print(chr(27) + "[2J")
+        #system("clear")
         mm.print_map()
         for k,v in choices.items():
             print("{}: {}". format(v, k))
@@ -54,10 +54,10 @@ def map_demo():
 
 
 
-map_file_struc = {1: {1: './maps/multimap_1_1.txt',
-                          2: './maps/multimap_1_2.txt'},
-                      2: {1: './maps/multimap_2_1.txt',
-                          2: './maps/multimap_2_2.txt'}}
+map_file_struc = {1: {1: '/tmp/no-name-game/maps/multimap_1_1.txt',
+                          2: '/tmp/no-name-game/maps/multimap_1_2.txt'},
+                      2: {1: '/tmp/no-name-game/maps/multimap_2_1.txt',
+                          2: '/tmp/no-name-game/maps/multimap_2_2.txt'}}
 mm = MultiMap(map_file_struc)
 
 
@@ -102,8 +102,8 @@ def refresh_map(win, mm):
 
 def main():
     
-    #map_demo()
-    curses.wrapper(curses_test)
+    map_demo()
+    #curses.wrapper(curses_test)
 
     
 
