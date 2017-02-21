@@ -8,7 +8,7 @@ def blah(text):
 
 
 
-eventd = Dispatcher(True)
+eventd = Dispatcher(debug=False)
 p1 = BaseActor("Player_1", 10)
 p2 = BaseActor("Player_2", 10)
 p3 = BaseActor("Player_3", 10)
