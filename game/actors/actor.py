@@ -30,7 +30,7 @@ class BaseActor():
         print("Player {} dies...".format(self.name))
 
     def move(self, new_pos):
-        print("Player moved to {}".format(new_pos))
+        print("Player {} moved to {}".format(self.name, new_pos))
 
     class MoveObs(Observer):
         def __init__(self, outer):
@@ -62,4 +62,7 @@ class BaseActor():
                     self.outer.attack(arg.dst)
                 if arg.dst is self.outer:
                     self.outer.get_attacked(arg.src)
+                    
+    def __str__(self):
+        return "{} -> {}".format(self.__class__.__name__, self.name)
 

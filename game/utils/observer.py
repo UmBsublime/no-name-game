@@ -10,16 +10,21 @@ class Observer:
 
 
 class Observable(Synchronization):
-    def __init__(self):
+    def __init__(self, debug=False):
+        self.debug = debug
         self.obs = []
         self.changed = 0
         Synchronization.__init__(self)
 
     def addObserver(self, observer):
         if observer not in self.obs:
+            if self.debug:
+                print("Adding observer {}".format(observer.outer))
             self.obs.append(observer)
 
     def deleteObserver(self, observer):
+        if self.debug:
+            print("Deleting observer {}".format(observer.outer))
         self.obs.remove(observer)
 
     def notifyObservers(self, arg = None):
@@ -40,6 +45,8 @@ class Observable(Synchronization):
             self.mutex.release()
         # Updating is not required to be synchronized:
         for observer in localArray:
+            if self.debug:
+                print("Notifying observer {}".format(observer.outer))
             observer.update(self, arg)
 
     def deleteObservers(self): self.obs = []
