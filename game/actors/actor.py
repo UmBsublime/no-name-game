@@ -2,9 +2,10 @@ from game.utils.observer import Observer
 from game.events import death, move, attack
 class BaseActor():
     
-    def __init__(self, name, hp):
+    def __init__(self, name, hp, position):
         self.name = name
         self.hp = hp
+        self.pos = position
         self._next_action = None
         self.move_observer = BaseActor.MoveObs(self)
         self.attack_observer = BaseActor.AttackObs(self)
@@ -20,6 +21,12 @@ class BaseActor():
         '''
         raise NotImplemented
 
+    def get_stats(self):
+        r =  {'name': self.name,
+                'hp': self.hp,
+                'pos': self.pos}
+        return r
+
     def get_attacked(self, src):
         print("Player {} is ready to defend from {}".format(self.name, src.name))
 
@@ -30,7 +37,8 @@ class BaseActor():
         print("Player {} dies...".format(self.name))
 
     def move(self, new_pos):
-        print("Player {} moved to {}".format(self.name, new_pos))
+        self.pos = new_pos
+        #print("Player {} moved to {}".format(self.name, new_pos))
 
     class MoveObs(Observer):
         def __init__(self, outer):

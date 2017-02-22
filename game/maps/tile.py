@@ -1,6 +1,6 @@
 
 
-class BaseTile():
+class BaseTile:
 
     def __init__(self, position, representation):
         self.type = 'BaseTile'

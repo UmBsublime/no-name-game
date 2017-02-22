@@ -3,6 +3,10 @@ from game.actors.player import BaseActor
 from game.events.dispatcher import Dispatcher
 from game.events import move, death, attack
 
+class UI:
+    def __init__(self):
+        pass
+
 
 def blah(text): print("\n{}\n* {:<27}*\n{}".format("="*30, text, "="*30))
 

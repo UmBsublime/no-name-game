@@ -12,6 +12,8 @@ class MultiMap():
     def __init__(self, map_path_struc):
         self.path_struc = map_path_struc
         self.multimap = self._prepare_multimap()
+        self.size_x = len(self.multimap.keys()) + 1
+        self.size_y = len(self.multimap[1].keys()) + 1
 
         self._current_pos = Position(1,1)
         self.current_map = self._map_at_pos(self._current_pos)
@@ -24,6 +26,9 @@ class MultiMap():
                 multimap[line][column] = Map(self.path_struc[line][column])
 
         return multimap
+
+    def add_actor(self, pos, representation='%'):
+        self.current_map.add_actor(pos, representation)
 
     def print_map(self):
         self.current_map.print_map()
