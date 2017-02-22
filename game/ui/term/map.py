@@ -9,8 +9,8 @@ class MultiMapUI:
 
     def __init__(self, multimap, position):
         self.mm = multimap
-        self.size_x = self.mm.current_map.size_x + 2  # +2 because of box
-        self.size_y = self.mm.current_map.size_y + 2
+        self.size_x = self.mm.current_map.size_x
+        self.size_y = self.mm.current_map.size_y
         self.move_observer = MultiMapUI.MoveObs(self)
         self.win = curses.newwin(self.mm.current_map.size_x,
                                  self.mm.current_map.size_y,

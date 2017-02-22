@@ -1,5 +1,6 @@
 from game.ui.term.map import MultiMapUI
 from game.ui.term.player import PlayerUI
+from game.ui.term.status import StatusUI
 from game.maps.multimap import MultiMap
 from game.maps.map import Position 
 from game.actors.actor import BaseActor
@@ -29,6 +30,9 @@ def main(stdscr):
     # Prep UI
     map_ui = MultiMapUI(mm, ui_pos)
     player_ui = PlayerUI(p1, Position(0, map_ui.size_y), Position(map_ui.size_x, 20))
+    status_ui = StatusUI(Position(map_ui.size_x, 0),
+                         Position(3, map_ui.size_y + player_ui.size_y))
+    
 
     # Plug everything in event dispatcher
     eventd = Dispatcher(debug=False)
@@ -36,6 +40,7 @@ def main(stdscr):
     eventd.moveNotifier.addObserver(p1.move_observer)
     eventd.moveNotifier.addObserver(e1.move_observer)
     eventd.moveNotifier.addObserver(player_ui.move_observer)
+    eventd.moveNotifier.addObserver(status_ui.event_observer)
 
     # We check what we've got
     stdscr.getch()

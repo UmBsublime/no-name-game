@@ -9,8 +9,8 @@ class PlayerUI:
 
     def __init__(self, player, position, size):
         self.player = player
-        self.size_x = size.pos_x + 2  # +2 because of box
-        self.size_y = size.pos_y + 2
+        self.size_x = size.pos_x
+        self.size_y = size.pos_y
         self.move_observer = PlayerUI.MoveObs(self)
         
         self.win = curses.newwin(self.size_x,
