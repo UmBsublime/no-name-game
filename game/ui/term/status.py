@@ -9,7 +9,7 @@ class StatusUI:
     def __init__(self, size, position):
         
         self.size_x = size.pos_x + 2
-        self.size_y = size.pos_y + 1
+        self.size_y = size.pos_y 
         self.event_observer = StatusUI.EventObs(self)
 
         self.content = []
