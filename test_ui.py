@@ -1,3 +1,5 @@
+from curses import wrapper
+
 from collections import OrderedDict
 
 from game.ui.term.map import MultiMapUI
@@ -6,11 +8,10 @@ from game.ui.term.status import StatusUI
 from game.ui.term.menu import MenuUI, Menu
 from game.ui.term.input import InputHandler
 from game.maps.multimap import MultiMap
-from game.maps.map import Position 
+from game.maps.map import Position
 from game.actors.actor import BaseActor
 from game.events.dispatcher import Dispatcher
 from game.events.move import MoveEvent
-import curses
 
 def main(stdscr):
 
@@ -30,12 +31,11 @@ def main(stdscr):
                           2: './maps/multimap_2_2.txt'}}
     mm = MultiMap(map_file_struc)
     mm.add_actor(e1_pos, '%')
-    
+
+    # Prep menu
     menu = Menu("Type key:", OrderedDict([("w", "Up"), ("a", "Left"), ("s", "Down"), ("d", "Right"), ("q", "Quit")]))
-    
 
     # Prep UI
-    
     map_ui = MultiMapUI(mm, ui_pos)
     player_ui = PlayerUI(p1,
                          Position(int(map_ui.size_x / 2), 20),
@@ -45,30 +45,31 @@ def main(stdscr):
                      Position(int(map_ui.size_x / 2), map_ui.size_y))
     status_ui = StatusUI(Position(1, map_ui.size_y + player_ui.size_y),
                          Position(map_ui.size_x, 0))
-    
+
     menu_ui.start()
     # Plug everything in event dispatcher
     eventd = Dispatcher(debug=False)
     eventd.moveNotifier.addObserver(map_ui.move_observer)
     eventd.moveNotifier.addObserver(player_ui.move_observer)
     eventd.moveNotifier.addObserver(status_ui.event_observer)
-    
+
     # Prep event handler
-    input_handler = InputHandler({"w":MoveEvent(p1, 'up'),
+    input_handler = InputHandler({"w": MoveEvent(p1, 'up'),
                                   "a": MoveEvent(p1, 'left'),
                                   "s": MoveEvent(p1, 'down'),
                                   "d": MoveEvent(p1, 'right'),
                                   "q": 'quit'}, stdscr.getch)
 
-    # We check what we've got
+    # EZPZ game loop
     while True:
         k = input_handler.get_key()
         if k is 'quit':
             exit()
-        eventd.move(k)
+        elif k is not None:
+            eventd.move(k)
     return repr(k)
 
 if __name__ == "__main__":
 
-    r = curses.wrapper(main)
+    r = wrapper(main)
     print(repr(r))
