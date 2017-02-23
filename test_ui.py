@@ -43,7 +43,7 @@ def main(stdscr):
     menu_ui = MenuUI(menu,
                      Position(int(map_ui.size_x / 2), 20),
                      Position(int(map_ui.size_x / 2), map_ui.size_y))
-    status_ui = StatusUI(Position(1, map_ui.size_y + player_ui.size_y),
+    status_ui = StatusUI(Position(5, map_ui.size_y + player_ui.size_y),
                          Position(map_ui.size_x, 0))
 
     menu_ui.start()
