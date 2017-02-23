@@ -6,6 +6,7 @@ class Dispatcher:
         self.attackNotifier = Dispatcher.Attack(self)
         self.moveNotifier = Dispatcher.Move(self)
         self.deathNotifier = Dispatcher.Death(self)
+        self.inputNotifier = Dispatcher.Input(self)
 
     def move(self, event):
         self.moveNotifier.notifyObservers(event)
@@ -36,6 +37,15 @@ class Dispatcher:
             self.clearChanged()
 
     class Death(Observable):
+        def __init__(self, outer):
+            Observable.__init__(self, outer.debug)
+
+        def notifyObservers(self, event):
+            self.setChanged()
+            Observable.notifyObservers(self, event)
+            self.clearChanged()
+
+    class Input(Observable):
         def __init__(self, outer):
             Observable.__init__(self, outer.debug)
 

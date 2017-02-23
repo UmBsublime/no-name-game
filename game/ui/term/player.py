@@ -7,7 +7,7 @@ from game.events import move
 
 class PlayerUI:
 
-    def __init__(self, player, position, size):
+    def __init__(self, player, size, position):
         self.player = player
         self.size_x = size.pos_x
         self.size_y = size.pos_y

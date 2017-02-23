@@ -6,10 +6,10 @@ from game.events import move, death, attack
 
 
 class StatusUI:
-    def __init__(self, position, size):
+    def __init__(self, size, position):
 
-        self.size_x = size.pos_x
-        self.size_y = size.pos_y
+        self.size_x = size.pos_x + 2
+        self.size_y = size.pos_y + 1
         self.event_observer = StatusUI.EventObs(self)
 
         self.win = curses.newwin(self.size_x,
@@ -18,13 +18,14 @@ class StatusUI:
                                  position.pos_y)
         self.win.box()
         self.win.clear()
-        #self.update('Init')
+        #welcome = "{space}{text}{space}".format(space=' ' * (self.size_x - 2))
+        self.update('Welcome')
         self.eventStruc = {move.MoveEvent: self.move,
                            death.DeathEvent: self.death,
                            attack.AttackEvent: self.attack}
     
     def move(self, event):
-        t = "{} moves to {}".format(event.target.name, event.pos)
+        t = "{} moved {}".format(event.target.name, event.direction)
         self.update(t)
     def attack(self, event):
         return "{} attacks {}".format(event.src.name, event.dst.name)
@@ -33,6 +34,8 @@ class StatusUI:
         pass
 
     def update(self, text):
+        clear_str = ' ' * self.size_y
+        self.win.addstr(1,0, clear_str)
         self.win.addstr(1, 1, text)
 
         self.win.box()

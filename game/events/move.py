@@ -1,7 +1,7 @@
 
 
 class MoveEvent:
-    def __init__(self, target, pos):
+    def __init__(self, target, direction):
         self.target = target
-        self.pos = pos
+        self.direction = direction
         
